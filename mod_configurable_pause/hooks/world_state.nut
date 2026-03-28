@@ -4,8 +4,7 @@
 	q.m.ConfigurablePause_OldPath <- null;
 	q.m.ConfigurablePause_LastPauseOnSeeEnemy <- 0.0;
 	q.m.ConfigurablePause <- {
-		LastPauseOnSeeEnemy = 0.0,
-		IsInThread = false
+		LastPauseOnSeeEnemy = 0.0
 	};
 
 	q.onInit = @(__original) function() {
@@ -18,6 +17,7 @@
 		if (_entity != null && this.m.EscortedEntity != null) {
 			this.m.Player.m.ConfigurablePause_PausedTile = this.m.EscortedEntity.getTile();
 		}
+		return ret;
 	}
 
 	q.onMouseInput = @(__original) function( _mouse ) {
@@ -104,13 +104,6 @@
 		if (_f || this.m.ConfigurablePause_LastPauseOnSeeEnemy + ::ConfigurablePause.Mod.ModSettings.getSetting("DelayBeforeUnpause").getValue() < ::Time.getExactTime()) {
 			return __original(_f);
 		}
-	}
-
-	q.onProcessInThread = @(__original) function() {
-		this.m.ConfigurablePause.IsInThread = true;
-		local ret = __original()
-		this.m.ConfigurablePause.IsInThread = false;
-		return ret;
 	}
 
 	q.ConfigurablePause_setPause <- function( _f ) {
