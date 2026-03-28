@@ -10,7 +10,7 @@
 };
 
 ::ConfigurablePause.MH <- ::Hooks.register(::ConfigurablePause.ID, ::ConfigurablePause.Version, ::ConfigurablePause.Name);
-::ConfigurablePause.MH.require("mod_msu");
+::ConfigurablePause.MH.require("mod_msu >= 1.7.0");
 ::ConfigurablePause.MH.conflictWith("mod_pause [Configurable Pause supercedes this mod]", "mod_mbpause [Configurable Pause supercedes this mod]");
 
 
