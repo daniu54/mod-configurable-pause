@@ -77,6 +77,13 @@
 			this.m.ConfigurablePause_Pause = false;
 		}
 
+		// Guard: vanilla onUpdate calls this.onCombatFinished() -- add a stub if it was
+		// removed or never defined due to a mod conflict, to prevent a script error.
+		if (!("onCombatFinished" in this)) {
+			::logWarning("[mod_configurable_pause] onCombatFinished missing from world_state, adding stub to prevent crash");
+			this.onCombatFinished <- function() {}
+		}
+
 		local ret = __original();
 		local isDayTime = ::World.getTime().IsDaytime;
 
